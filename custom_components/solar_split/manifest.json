@@ -1,12 +1,12 @@
 {
   "domain": "solar_split",
   "name": "Solar Split Sensor",
-  "version": "1.0.0",
-  "config_flow": true,
-  "documentation": "https://github.com/Floppe/solar_split",
-  "dependencies": [],
   "codeowners": ["@Floppe"],
-  "requirements": [],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Floppe/solar_split",
   "integration_type": "device",
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "requirements": [],
+  "version": "1.0.0"
 }
