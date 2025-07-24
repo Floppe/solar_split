@@ -1,0 +1,11 @@
+{
+  "domain": "solar_split",
+  "name": "Solar split",
+  "version": "1.4.1",
+  "config_flow": true,
+  "documentation": "",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": [],
+  "integration_type": "device"
+}
