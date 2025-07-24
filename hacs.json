@@ -1,0 +1,9 @@
+{
+  "name": "Solar Split",
+  "content_in_root": false,
+  "domain": "solar_split",
+  "domain_path": "custom_components/solar_split",
+  "zip_release": false,
+  "filename": "solar_split",
+  "render_readme": true
+}

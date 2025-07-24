@@ -1,11 +1,11 @@
 {
   "domain": "solar_split",
-  "name": "Solar split",
-  "version": "1.4.1",
+  "name": "Solar Split Sensor",
+  "version": "1.0.0",
   "config_flow": true,
-  "documentation": "",
+  "documentation": "https://github.com/Floppe/solar_split",
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": ["@Floppe"],
   "requirements": [],
   "integration_type": "device"
 }

@@ -1,0 +1,18 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Solar Split Configuration",
+        "description": "Set up your solar split sensors.",
+        "data": {
+          "name": "Name",
+          "source_sensor": "Source sensor",
+          "solar_sensor": "Solar sensor"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This integration is already configured."
+    }
+  }
+}
