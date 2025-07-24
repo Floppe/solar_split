@@ -7,5 +7,6 @@
   "dependencies": [],
   "codeowners": ["@Floppe"],
   "requirements": [],
-  "integration_type": "device"
+  "integration_type": "device",
+  "iot_class": "local_polling"
 }

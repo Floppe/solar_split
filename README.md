@@ -15,7 +15,7 @@ A Home Assistant integration to split sensor readings (e.g., power or energy) be
 ### Via HACS (Custom Repository)
 
 1. Go to **HACS → Integrations → 3-dot menu → Custom repositories**
-2. Add this repo: `https://github.com/yourusername/solar_split`
+2. Add this repo: `https://github.com/Floppe/solar_split`
 3. Select category: **Integration**
 4. Find and install "Solar Split" in HACS
 
