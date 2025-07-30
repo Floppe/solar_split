@@ -12,7 +12,6 @@ jobs:
       - name: Zip
         run: |
             cd ${{ github.workspace }}/custom_components/$name
-            cp ../../LICENSE ./
             zip -r ../$name.zip . -x "*.git*" "*.git/*" "*.github/*"
       - name: Release
         uses: softprops/action-gh-release@v2
