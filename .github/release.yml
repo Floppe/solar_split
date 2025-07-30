@@ -1,0 +1,23 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Zip
+        run: |
+            cd ${{ github.workspace }}/custom_components/$name
+            cp ../../license ./
+            zip -r ../$name.zip . -x "*.git*" "*.git/*" "*.github/*"
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          draft: true
+          generate_release_notes: true
+          files: ${{ github.workspace }}/custom_components/*.zip
