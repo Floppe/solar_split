@@ -1,9 +1,14 @@
 import logging
-from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
+from homeassistant.components.sensor import (
+    SensorEntity,
+    SensorDeviceClass,
+    SensorStateClass,
+)
 from homeassistant.const import UnitOfPower
 from homeassistant.helpers.event import async_track_state_change_event
 
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
     data = {**config_entry.data, **config_entry.options}
@@ -20,13 +25,30 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
     for i, sensor_id in enumerate(device_ids):
         name = sensor_id.split(".")[-1].replace("_", " ").title()
-        entities.append(SolarSplitSensor(f"{name} Solar", sensor_id, solar_sensor, i, all_entities, is_grid=False))
-        entities.append(SolarSplitSensor(f"{name} Grid", sensor_id, solar_sensor, i, all_entities, is_grid=True))
+        entities.append(
+            SolarSplitSensor(
+                f"{name} Solar", sensor_id, solar_sensor, i, all_entities, is_grid=False
+            )
+        )
+        entities.append(
+            SolarSplitSensor(
+                f"{name} Grid", sensor_id, solar_sensor, i, all_entities, is_grid=True
+            )
+        )
 
     async_add_entities(entities, update_before_add=True)
 
+
 class SolarSplitSensor(SensorEntity):
-    def __init__(self, name, device_sensor_id, solar_sensor_id, priority_index, all_devices, is_grid):
+    def __init__(
+        self,
+        name,
+        device_sensor_id,
+        solar_sensor_id,
+        priority_index,
+        all_devices,
+        is_grid,
+    ):
         self._name = name
         self._device_sensor_id = device_sensor_id
         self._solar_sensor_id = solar_sensor_id
@@ -44,7 +66,9 @@ class SolarSplitSensor(SensorEntity):
             self.async_write_ha_state()
 
         for sensor_id in [self._solar_sensor_id, self._device_sensor_id]:
-            unsub = async_track_state_change_event(self.hass, [sensor_id], _update_state)
+            unsub = async_track_state_change_event(
+                self.hass, [sensor_id], _update_state
+            )
             self._unsub.append(unsub)
 
     async def async_will_remove_from_hass(self):
@@ -68,15 +92,29 @@ class SolarSplitSensor(SensorEntity):
         device_state = self.hass.states.get(self._device_sensor_id)
 
         try:
-            solar = float(solar_state.state) if solar_state and solar_state.state not in (None, "") else 0
-            if solar_state and solar_state.attributes.get("unit_of_measurement") == "kW":
+            solar = (
+                float(solar_state.state)
+                if solar_state and solar_state.state not in (None, "")
+                else 0
+            )
+            if (
+                solar_state
+                and solar_state.attributes.get("unit_of_measurement") == "kW"
+            ):
                 solar *= 1000
         except (ValueError, TypeError):
             solar = 0
 
         try:
-            device = float(device_state.state) if device_state and device_state.state not in (None, "") else 0
-            if device_state and device_state.attributes.get("unit_of_measurement") == "kW":
+            device = (
+                float(device_state.state)
+                if device_state and device_state.state not in (None, "")
+                else 0
+            )
+            if (
+                device_state
+                and device_state.attributes.get("unit_of_measurement") == "kW"
+            ):
                 device *= 1000
         except (ValueError, TypeError):
             return 0

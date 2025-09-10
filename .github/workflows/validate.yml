@@ -3,6 +3,8 @@ name: Validate Home Assistant Integration
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   hassfest:

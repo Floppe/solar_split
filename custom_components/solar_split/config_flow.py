@@ -22,29 +22,35 @@ class SolarSplitConfigFlow(ConfigFlow, domain=DOMAIN):
             return self.async_create_entry(title="Solar Split", data=user_input)
 
         sensors = [
-            state.entity_id for state in self.hass.states.async_all("sensor")
+            state.entity_id
+            for state in self.hass.states.async_all("sensor")
             if state.attributes.get("unit_of_measurement") in ("W", "kW")
         ]
         sensor_options = sorted(sensors)
 
-        data_schema = vol.Schema({
-            vol.Required("name", default="Solar split"): str,
-            vol.Required("solar_sensor"): vol.In(sensor_options),
-            vol.Required("device_1"): vol.In(sensor_options),
-            vol.Optional("device_2"): vol.In([""] + sensor_options),
-            vol.Optional("device_3"): vol.In([""] + sensor_options),
-            vol.Optional("device_4"): vol.In([""] + sensor_options),
-            vol.Optional("device_5"): vol.In([""] + sensor_options),
-            vol.Optional("device_6"): vol.In([""] + sensor_options),
-            vol.Optional("device_7"): vol.In([""] + sensor_options),
-        })
+        data_schema = vol.Schema(
+            {
+                vol.Required("name", default="Solar split"): str,
+                vol.Required("solar_sensor"): vol.In(sensor_options),
+                vol.Required("device_1"): vol.In(sensor_options),
+                vol.Optional("device_2"): vol.In([""] + sensor_options),
+                vol.Optional("device_3"): vol.In([""] + sensor_options),
+                vol.Optional("device_4"): vol.In([""] + sensor_options),
+                vol.Optional("device_5"): vol.In([""] + sensor_options),
+                vol.Optional("device_6"): vol.In([""] + sensor_options),
+                vol.Optional("device_7"): vol.In([""] + sensor_options),
+            }
+        )
 
-        return self.async_show_form(step_id="user", data_schema=data_schema, errors=errors)
+        return self.async_show_form(
+            step_id="user", data_schema=data_schema, errors=errors
+        )
 
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
         return SolarSplitOptionsFlow(config_entry)
+
 
 class SolarSplitOptionsFlow(OptionsFlow):
     def __init__(self, config_entry):
@@ -59,7 +65,8 @@ class SolarSplitOptionsFlow(OptionsFlow):
             return self.async_create_entry(title="Solar Split", data=user_input)
 
         sensors = [
-            state.entity_id for state in self.hass.states.async_all("sensor")
+            state.entity_id
+            for state in self.hass.states.async_all("sensor")
             if state.attributes.get("unit_of_measurement") in ("W", "kW")
         ]
         sensor_options = sorted(sensors)
@@ -68,18 +75,38 @@ class SolarSplitOptionsFlow(OptionsFlow):
             if self.config_entry is None:
                 _LOGGER.debug("config_entry is none, cannot get key: %s", key)
                 return ""
-            return self.config_entry.options.get(key, self.config_entry.data.get(key, ""))
+            return self.config_entry.options.get(
+                key, self.config_entry.data.get(key, "")
+            )
 
-        data_schema = vol.Schema({
-            vol.Required("name", default=get("name")): str,
-            vol.Required("solar_sensor", default=get("solar_sensor")): vol.In(sensor_options),
-            vol.Required("device_1", default=get("device_1")): vol.In(sensor_options),
-            vol.Optional("device_2", default=get("device_2")): vol.In([""] + sensor_options),
-            vol.Optional("device_3", default=get("device_3")): vol.In([""] + sensor_options),
-            vol.Optional("device_4", default=get("device_4")): vol.In([""] + sensor_options),
-            vol.Optional("device_5", default=get("device_5")): vol.In([""] + sensor_options),
-            vol.Optional("device_6", default=get("device_6")): vol.In([""] + sensor_options),
-            vol.Optional("device_7", default=get("device_7")): vol.In([""] + sensor_options),
-        })
+        data_schema = vol.Schema(
+            {
+                vol.Required("name", default=get("name")): str,
+                vol.Required("solar_sensor", default=get("solar_sensor")): vol.In(
+                    sensor_options
+                ),
+                vol.Required("device_1", default=get("device_1")): vol.In(
+                    sensor_options
+                ),
+                vol.Optional("device_2", default=get("device_2")): vol.In(
+                    [""] + sensor_options
+                ),
+                vol.Optional("device_3", default=get("device_3")): vol.In(
+                    [""] + sensor_options
+                ),
+                vol.Optional("device_4", default=get("device_4")): vol.In(
+                    [""] + sensor_options
+                ),
+                vol.Optional("device_5", default=get("device_5")): vol.In(
+                    [""] + sensor_options
+                ),
+                vol.Optional("device_6", default=get("device_6")): vol.In(
+                    [""] + sensor_options
+                ),
+                vol.Optional("device_7", default=get("device_7")): vol.In(
+                    [""] + sensor_options
+                ),
+            }
+        )
 
         return self.async_show_form(step_id="init", data_schema=data_schema)
