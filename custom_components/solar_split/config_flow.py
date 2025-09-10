@@ -1,6 +1,5 @@
 import voluptuous as vol
 import logging
-from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.config_entries import ConfigFlow, OptionsFlow, ConfigFlowResult
 

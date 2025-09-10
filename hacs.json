@@ -5,5 +5,6 @@
   "domain_path": "custom_components/solar_split",
   "zip_release": false,
   "filename": "solar_split",
-  "render_readme": true
+  "render_readme": true,
+  "issue_tracker": "github.com/Floppe/solar_split/issues"
 }

@@ -1,6 +1,9 @@
+import logging
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfPower
 from homeassistant.helpers.event import async_track_state_change_event
+
+_LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
     data = {**config_entry.data, **config_entry.options}
